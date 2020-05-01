@@ -4,6 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 .DS_Store
+pom.xml
 
 ### STS ###
 .apt_generated
