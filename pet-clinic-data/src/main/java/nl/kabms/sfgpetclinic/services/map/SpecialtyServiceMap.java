@@ -1,13 +1,13 @@
 package nl.kabms.sfgpetclinic.services.map;
 
 import nl.kabms.sfgpetclinic.model.Specialty;
-import nl.kabms.sfgpetclinic.services.SpecialtiesService;
+import nl.kabms.sfgpetclinic.services.SpecialtiyService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class SpecialtiesServiceMap extends AbstractMapService<Specialty, Long> implements SpecialtiesService {
+public class SpecialtyServiceMap extends AbstractMapService<Specialty, Long> implements SpecialtiyService {
 
     @Override
     public Set<Specialty> findAll() {
