@@ -1,10 +1,7 @@
 package nl.kabms.sfgpetclinic.bootstrap;
 
 import nl.kabms.sfgpetclinic.model.*;
-import nl.kabms.sfgpetclinic.services.OwnerService;
-import nl.kabms.sfgpetclinic.services.PetTypeService;
-import nl.kabms.sfgpetclinic.services.SpecialtiyService;
-import nl.kabms.sfgpetclinic.services.VetService;
+import nl.kabms.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtiyService specialtiyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtiyService specialtiyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      SpecialtiyService specialtiyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtiyService = specialtiyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -86,7 +86,17 @@ public class DataLoader implements CommandLineRunner {
         fionasPet.setName("Abi");
         owner2.getPets().add(fionasPet);
 
+        ownerService.save(owner2);
+
         System.out.println("Loaded owners....");
+
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
