@@ -2,11 +2,13 @@ package nl.kabms.sfgpetclinic.services.map;
 
 import nl.kabms.sfgpetclinic.model.Visit;
 import nl.kabms.sfgpetclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class VisitServiceMap extends AbstractMapService<Visit, Long> implements VisitService {
 
     @Override
@@ -28,7 +30,7 @@ public class VisitServiceMap extends AbstractMapService<Visit, Long> implements 
     public Visit save(Visit visit) {
 
         if (visit.getPet() == null || visit.getPet().getOwner() == null || visit.getPet().getId() == null ||
-        visit.getPet().getOwner().getId() == null) {
+                visit.getPet().getOwner().getId() == null) {
             throw new RuntimeException("Invalid visit");
         }
 
