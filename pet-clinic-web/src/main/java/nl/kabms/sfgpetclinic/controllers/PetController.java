@@ -47,7 +47,7 @@ public class PetController {
     }
 
     @GetMapping("/pets/new")
-    public String initiateCreateUserForm(Owner owner, Model model) {
+    public String initiateCreatePetForm(Owner owner, Model model) {
         Pet pet = new Pet();
         owner.getPets().add(pet);
         pet.setOwner(owner);
@@ -56,7 +56,7 @@ public class PetController {
     }
 
     @PostMapping("/pets/new")
-    public String processCreateUserForm(Owner owner, @Valid Pet pet, BindingResult result, Model model) {
+    public String processCreatePetForm(Owner owner, @Valid Pet pet, BindingResult result, Model model) {
         if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null){
             result.rejectValue("name", "duplicate", "already exists");
         }
